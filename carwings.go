@@ -91,6 +91,7 @@ type Session struct {
 	config          Config
 	encpw           string
 	VIN             string
+	dcmID           string
 	customSessionID string
 	tz              string
 	loc             *time.Location
@@ -587,6 +588,7 @@ func (s *Session) Login() error {
 
 	s.customSessionID = vi.CustomSessionID
 	s.VIN = vi.VIN
+	s.dcmID = loginResp.CustomerInfo.VehicleInfo.DCMID
 	s.tz = loginResp.CustomerInfo.Timezone
 
 	s.loc, err = time.LoadLocation(s.tz)
@@ -624,6 +626,7 @@ func (s *Session) setCommonParams(params url.Values) url.Values {
 	params.Set("VIN", s.VIN)
 	params.Set("custom_sessionid", s.customSessionID)
 	params.Set("tz", s.tz)
+	params.Set("DCMID", s.dcmID)
 	return params
 }
 
