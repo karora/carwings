@@ -1,0 +1,337 @@
+{
+  "status": 200,
+  "PriceSimulatorDetailInfoResponsePersonalData": {
+    "TargetMonth": "201808",
+    "TotalPowerConsumptTotal": "55.88882",
+    "TotalPowerConsumptMoter": "71.44184",
+    "TotalPowerConsumptMinus": "15.55302",
+    "ElectricPrice": "0.15",
+    "ElectricBill": "8.3833230",
+    "ElectricCostScale": "kWh/100km",
+    "MainRateFlg": "COUNTRY",
+    "ExistFlg": "EXIST",
+    "PriceSimulatorDetailInfoDateList": {
+      "PriceSimulatorDetailInfoDate": [
+        {
+          "TargetDate": "2018-08-05",
+          "PriceSimulatorDetailInfoTripList": {
+            "PriceSimulatorDetailInfoTrip": [
+              {
+                "TripId": "1",
+                "PowerConsumptTotal": "2461.12",
+                "PowerConsumptMoter": "3812.22",
+                "PowerConsumptMinus": "1351.1",
+                "TravelDistance": "17841",
+                "ElectricMileage": "13.8",
+                "CO2Reduction": "3",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-05T10:18:47"
+              },
+              {
+                "TripId": "2",
+                "PowerConsumptTotal": "1426.84",
+                "PowerConsumptMoter": "2187.36",
+                "PowerConsumptMinus": "760.52",
+                "TravelDistance": "13036",
+                "ElectricMileage": "10.9",
+                "CO2Reduction": "2",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-05T11:32:01"
+              },
+              {
+                "TripId": "3",
+                "PowerConsumptTotal": "346.36",
+                "PowerConsumptMoter": "496.4",
+                "PowerConsumptMinus": "150.04",
+                "TravelDistance": "1865",
+                "ElectricMileage": "18.6",
+                "CO2Reduction": "0",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-05T15:03:20"
+              },
+              {
+                "TripId": "4",
+                "PowerConsumptTotal": "218.5",
+                "PowerConsumptMoter": "326.17",
+                "PowerConsumptMinus": "107.67",
+                "TravelDistance": "2006",
+                "ElectricMileage": "10.9",
+                "CO2Reduction": "0",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-05T15:25:23"
+              },
+              {
+                "TripId": "5",
+                "PowerConsumptTotal": "4.0",
+                "PowerConsumptMoter": "4.0",
+                "PowerConsumptMinus": "0.0",
+                "TravelDistance": "0",
+                "ElectricMileage": "0",
+                "CO2Reduction": "0",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-05T15:30:33"
+              }
+            ]
+          },
+          "DisplayDate": "Aug 05"
+        },
+        {
+          "TargetDate": "2018-08-07",
+          "PriceSimulatorDetailInfoTripList": {
+            "PriceSimulatorDetailInfoTrip": [
+              {
+                "TripId": "1",
+                "PowerConsumptTotal": "5476.3",
+                "PowerConsumptMoter": "7098.62",
+                "PowerConsumptMinus": "1622.32",
+                "TravelDistance": "35799",
+                "ElectricMileage": "15.3",
+                "CO2Reduction": "6",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-07T07:20:47"
+              },
+              {
+                "TripId": "2",
+                "PowerConsumptTotal": "3885.0",
+                "PowerConsumptMoter": "4675.78",
+                "PowerConsumptMinus": "790.78",
+                "TravelDistance": "32361",
+                "ElectricMileage": "12.0",
+                "CO2Reduction": "6",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-07T14:19:29"
+              }
+            ]
+          },
+          "DisplayDate": "Aug 07"
+        },
+        {
+          "TargetDate": "2018-08-08",
+          "PriceSimulatorDetailInfoTripList": {
+            "PriceSimulatorDetailInfoTrip": [
+              {
+                "TripId": "1",
+                "PowerConsumptTotal": "4416.78",
+                "PowerConsumptMoter": "5132.76",
+                "PowerConsumptMinus": "715.98",
+                "TravelDistance": "30700",
+                "ElectricMileage": "14.4",
+                "CO2Reduction": "5",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-08T07:21:25"
+              },
+              {
+                "TripId": "2",
+                "PowerConsumptTotal": "4407.1",
+                "PowerConsumptMoter": "6218.26",
+                "PowerConsumptMinus": "1811.16",
+                "TravelDistance": "39085",
+                "ElectricMileage": "11.3",
+                "CO2Reduction": "7",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-08T16:35:00"
+              }
+            ]
+          },
+          "DisplayDate": "Aug 08"
+        },
+        {
+          "TargetDate": "2018-08-09",
+          "PriceSimulatorDetailInfoTripList": {
+            "PriceSimulatorDetailInfoTrip": [
+              {
+                "TripId": "1",
+                "PowerConsumptTotal": "4935.94",
+                "PowerConsumptMoter": "5723.21",
+                "PowerConsumptMinus": "787.27",
+                "TravelDistance": "30596",
+                "ElectricMileage": "16.1",
+                "CO2Reduction": "5",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-09T07:58:02"
+              },
+              {
+                "TripId": "2",
+                "PowerConsumptTotal": "3796.46",
+                "PowerConsumptMoter": "5457.43",
+                "PowerConsumptMinus": "1660.97",
+                "TravelDistance": "31439",
+                "ElectricMileage": "12.1",
+                "CO2Reduction": "5",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-09T14:33:05"
+              }
+            ]
+          },
+          "DisplayDate": "Aug 09"
+        },
+        {
+          "TargetDate": "2018-08-10",
+          "PriceSimulatorDetailInfoTripList": {
+            "PriceSimulatorDetailInfoTrip": [
+              {
+                "TripId": "1",
+                "PowerConsumptTotal": "5387.78",
+                "PowerConsumptMoter": "6357.79",
+                "PowerConsumptMinus": "970.01",
+                "TravelDistance": "31248",
+                "ElectricMileage": "17.2",
+                "CO2Reduction": "5",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-10T07:02:03"
+              },
+              {
+                "TripId": "2",
+                "PowerConsumptTotal": "112.36",
+                "PowerConsumptMoter": "229.8",
+                "PowerConsumptMinus": "117.44",
+                "TravelDistance": "948",
+                "ElectricMileage": "11.9",
+                "CO2Reduction": "0",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-10T08:02:42"
+              },
+              {
+                "TripId": "3",
+                "PowerConsumptTotal": "119.69",
+                "PowerConsumptMoter": "215.42",
+                "PowerConsumptMinus": "95.73",
+                "TravelDistance": "641",
+                "ElectricMileage": "18.7",
+                "CO2Reduction": "0",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-10T16:26:15"
+              },
+              {
+                "TripId": "4",
+                "PowerConsumptTotal": "3912.36",
+                "PowerConsumptMoter": "4413.61",
+                "PowerConsumptMinus": "501.25",
+                "TravelDistance": "24710",
+                "ElectricMileage": "15.8",
+                "CO2Reduction": "4",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-10T18:17:08"
+              },
+              {
+                "TripId": "5",
+                "PowerConsumptTotal": "712.29",
+                "PowerConsumptMoter": "1171.5",
+                "PowerConsumptMinus": "459.21",
+                "TravelDistance": "8275",
+                "ElectricMileage": "8.6",
+                "CO2Reduction": "1",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-10T18:40:12"
+              }
+            ]
+          },
+          "DisplayDate": "Aug 10"
+        },
+        {
+          "TargetDate": "2018-08-11",
+          "PriceSimulatorDetailInfoTripList": {
+            "PriceSimulatorDetailInfoTrip": [
+              {
+                "TripId": "1",
+                "PowerConsumptTotal": "2584.02",
+                "PowerConsumptMoter": "3283.88",
+                "PowerConsumptMinus": "699.86",
+                "TravelDistance": "19623",
+                "ElectricMileage": "13.2",
+                "CO2Reduction": "4",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-11T07:43:35"
+              },
+              {
+                "TripId": "2",
+                "PowerConsumptTotal": "4667.39",
+                "PowerConsumptMoter": "5887.14",
+                "PowerConsumptMinus": "1219.75",
+                "TravelDistance": "36939",
+                "ElectricMileage": "12.6",
+                "CO2Reduction": "6",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-11T16:40:07"
+              },
+              {
+                "TripId": "3",
+                "PowerConsumptTotal": "5.32",
+                "PowerConsumptMoter": "5.32",
+                "PowerConsumptMinus": "0.0",
+                "TravelDistance": "0",
+                "ElectricMileage": "0",
+                "CO2Reduction": "0",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-11T19:54:07"
+              }
+            ]
+          },
+          "DisplayDate": "Aug 11"
+        },
+        {
+          "TargetDate": "2018-08-12",
+          "PriceSimulatorDetailInfoTripList": {
+            "PriceSimulatorDetailInfoTrip": [
+              {
+                "TripId": "1",
+                "PowerConsumptTotal": "4828.1",
+                "PowerConsumptMoter": "5991.71",
+                "PowerConsumptMinus": "1163.61",
+                "TravelDistance": "40293",
+                "ElectricMileage": "12.0",
+                "CO2Reduction": "7",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-12T13:20:05"
+              },
+              {
+                "TripId": "2",
+                "PowerConsumptTotal": "1292.41",
+                "PowerConsumptMoter": "1529.36",
+                "PowerConsumptMinus": "236.95",
+                "TravelDistance": "9828",
+                "ElectricMileage": "13.2",
+                "CO2Reduction": "2",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-12T14:28:14"
+              },
+              {
+                "TripId": "3",
+                "PowerConsumptTotal": "675.77",
+                "PowerConsumptMoter": "903.67",
+                "PowerConsumptMinus": "227.9",
+                "TravelDistance": "7062",
+                "ElectricMileage": "9.6",
+                "CO2Reduction": "1",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-12T14:45:19"
+              },
+              {
+                "TripId": "4",
+                "PowerConsumptTotal": "216.93",
+                "PowerConsumptMoter": "320.43",
+                "PowerConsumptMinus": "103.5",
+                "TravelDistance": "1957",
+                "ElectricMileage": "11.1",
+                "CO2Reduction": "0",
+                "MapDisplayFlg": "NONACTIVE",
+                "GpsDatetime": "2018-08-12T15:03:33"
+              }
+            ]
+          },
+          "DisplayDate": "Aug 12"
+        }
+      ]
+    },
+    "PriceSimulatorTotalInfo": {
+      "TotalNumberOfTrips": "23",
+      "TotalPowerConsumptTotal": "55.88882",
+      "TotalPowerConsumptMoter": "71.44184",
+      "TotalPowerConsumptMinus": "15.55302",
+      "TotalTravelDistance": "416252",
+      "TotalElectricMileage": "0.0134",
+      "TotalCO2Reductiont": "72"
+    },
+    "DisplayMonth": "Aug/2018"
+  }
+}
