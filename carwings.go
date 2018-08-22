@@ -630,7 +630,12 @@ func (s *Session) setCommonParams(params url.Values) url.Values {
 	return params
 }
 
-// MetersToUnits converts Carwings distances (in meters) to miles/km as configured
+// DistancePowerToEfficiency converts Carwings distances(m) and power(kWh) to kWh/100(miles|km) as configured
+func (s Session) DistancePowerToEfficiency(meters int, power float64) float64 {
+	return (power / s.MetersToUnits(meters)) / 10
+}
+
+// MetersToUnits converts Carwings distances (in meters) to miles|km as configured
 func (s Session) MetersToUnits(meters int) float64 {
 	const MilesPerMeter = 0.000621371
 	if s.config.SiUnits {
@@ -645,6 +650,14 @@ func (s Session) UnitsName() string {
 		return "km"
 	}
 	return "miles"
+}
+
+// EfficiencyUnitsName returns the name of the units
+func (s Session) EfficiencyUnitsName() string {
+	if s.config.SiUnits {
+		return "kWh/100km"
+	}
+	return "kWh/100mi"
 }
 
 // WaitForResult will poll using the supplied method until either success or error
