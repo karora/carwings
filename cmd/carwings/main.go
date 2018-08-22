@@ -362,20 +362,68 @@ func runLocate(s *carwings.Session, args []string) error {
 	return nil
 }
 
-func runMonthly(s *carwings.Session, args []string) error {
-	fmt.Println("Sending monthly statistics request...")
+var ms *carwings.MonthlyStatistics
 
-	ms, err := s.GetMonthlyStatistics(time.Now().Local())
+func monthlyHeader(s *carwings.Session, args []string) (*carwings.MonthlyStatistics, error) {
+	if ms == nil {
+		fmt.Println("Sending monthly statistics request...")
+
+		stats, err := s.GetMonthlyStatistics(time.Now().Local())
+		if err != nil {
+			return nil, err
+		}
+		ms = &stats
+
+		fmt.Println("Monthly Driving Statistics for ", time.Now().Local().Format("January 2006"))
+		fmt.Printf("  Driving efficiency: %.4f %s over %.1f %s in %d trips\n",
+			s.DistancePowerToEfficiency(ms.Total.MetersTravelled, ms.Total.PowerConsumed*1000), s.EfficiencyUnitsName(),
+			s.MetersToUnits(ms.Total.MetersTravelled), s.UnitsName(), ms.Total.Trips)
+		fmt.Printf("  Driving cost: %.4f at a rate of %.4f/kWh for %.1fkWh => %.4f/%s\n",
+			ms.ElectricityBill, ms.ElectricityRate, ms.Total.PowerConsumed,
+			ms.ElectricityBill/s.MetersToUnits(ms.Total.MetersTravelled), s.UnitsName())
+	}
+
+	fmt.Println("")
+
+	return ms, nil
+}
+
+func runMonthlySummary(s *carwings.Session, args []string) error {
+	ms, err := monthlyHeader(s, args)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println("Monthly Driving Statistics for ", time.Now().Local().Format("January 2006"))
-	fmt.Printf("  Driving efficiency: %.4f %s over %.1f %s in %d trips\n",
-		ms.Total.Efficiency*1000, ms.EfficiencyScale, s.MetersToUnits(ms.Total.MetersTravelled), s.UnitsName(), ms.Total.Trips)
-	fmt.Printf("  Driving cost: %.4f at a rate of %.4f/kWh for %.1fkWh => %.4f/%s\n",
-		ms.ElectricityBill, ms.ElectricityRate, ms.Total.PowerConsumed, ms.ElectricityBill/s.MetersToUnits(ms.Total.MetersTravelled), s.UnitsName())
-	fmt.Println("")
+	for i := 0; i < len(ms.Dates); i++ {
+		date := ms.Dates[i]
+		var distance int
+		var totalPower, regenPower, motorPower float64
+		var td carwings.TripDetail
+		for j := 0; j < len(date.Trips); j++ {
+			td = date.Trips[j]
+			distance += td.Meters
+			totalPower += td.PowerConsumedTotal
+			regenPower += td.PowerRegenerated
+			motorPower += td.PowerConsumedMotor
+		}
+		if distance > 0 {
+			efficiency := s.DistancePowerToEfficiency(distance, totalPower)
+			fmt.Printf("  %-21.21s %5.1f%s %5.2fkWh (%5.2f - %5.2f) %5.1f %-10.10s\n",
+				td.Started.Local().Format("2006-01-02 Monday"),
+				s.MetersToUnits(distance), s.UnitsName(),
+				totalPower/1000, motorPower/1000, regenPower/1000,
+				efficiency, s.EfficiencyUnitsName())
+		}
+	}
+
+	return nil
+}
+
+func runMonthlyDetail(s *carwings.Session, args []string) error {
+	ms, err := monthlyHeader(s, args)
+	if err != nil {
+		return err
+	}
 
 	for i := 0; i < len(ms.Dates); i++ {
 		date := ms.Dates[i]
