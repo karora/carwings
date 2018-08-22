@@ -13,7 +13,7 @@ import (
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "USAGE\n")
-	fmt.Fprintf(os.Stderr, "  %s <mode> [flags]\n", os.Args[0])
+	fmt.Fprintf(os.Stderr, "  %s [flags] <command> [<command> ...]\n", os.Args[0])
 	fmt.Fprintf(os.Stderr, "\n")
 	fmt.Fprintf(os.Stderr, "FLAGS\n")
 	flag.VisitAll(func(f *flag.Flag) {
@@ -28,10 +28,27 @@ func usage() {
 	fmt.Fprintf(os.Stderr, "  climate-off       Turn off climate control\n")
 	fmt.Fprintf(os.Stderr, "  climate-on        Turn on climate control\n")
 	fmt.Fprintf(os.Stderr, "  locate            Locate vehicle\n")
-	fmt.Fprintf(os.Stderr, "  monthly           Monthly driving statistics\n")
+	fmt.Fprintf(os.Stderr, "  monthly-summary   Monthly driving statistics (by day)\n")
+	fmt.Fprintf(os.Stderr, "  monthly-detail    Monthly driving statistics (by trip)\n")
 	fmt.Fprintf(os.Stderr, "  daily             Daily driving statistics\n")
 	fmt.Fprintf(os.Stderr, "  server            Listen for requests on port 8040\n")
 	fmt.Fprintf(os.Stderr, "\n")
+}
+
+type carwingsRunFunction func(*carwings.Session, []string) error
+
+var commands = map[string]carwingsRunFunction{
+	"update":          runUpdate,
+	"battery":         runBattery,
+	"charge":          runCharge,
+	"climate":         runClimateStatus,
+	"climate-off":     runClimateOff,
+	"climate-on":      runClimateOn,
+	"locate":          runLocate,
+	"server":          runServer,
+	"monthly-summary": runMonthlySummary,
+	"monthly-detail":  runMonthlyDetail,
+	"daily":           runDaily,
 }
 
 func main() {
@@ -89,55 +106,23 @@ func main() {
 		os.Exit(1)
 	}
 
-	var run func(*carwings.Session, []string) error
-
-	args := flag.Args()
-	cmd, args := strings.ToLower(args[0]), args[1:]
-	switch cmd {
-	case "update":
-		run = runUpdate
-
-	case "battery":
-		run = runBattery
-
-	case "charge":
-		run = runCharge
-
-	case "climate":
-		run = runClimateStatus
-
-	case "climate-off":
-		run = runClimateOff
-
-	case "climate-on":
-		run = runClimateOn
-
-	case "locate":
-		run = runLocate
-
-	case "server":
-		run = runServer
-
-	case "monthly":
-		run = runMonthly
-
-	case "daily":
-		run = runDaily
-
-	default:
-		usage()
-		os.Exit(1)
-	}
-
 	s, err := carwings.Connect(cfg)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "ERROR: %v\n", err)
 		os.Exit(1)
 	}
 
-	if err := run(s, args); err != nil {
-		fmt.Fprintf(os.Stderr, "ERROR: %v\n", err)
-		os.Exit(1)
+	args := flag.Args()
+	for err == nil && len(args) > 0 {
+		run, exists := commands[strings.ToLower(args[0])]
+		if !exists {
+			err = errors.New("Command '" + args[0] + "' is not understood.")
+		}
+		args = args[1:]
+		if err := run(s, args); err != nil {
+			fmt.Fprintf(os.Stderr, "ERROR: %v\n", err)
+			os.Exit(1)
+		}
 	}
 }
 
