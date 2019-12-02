@@ -69,6 +69,7 @@ func encrypt(s, key string) (string, error) {
 	return base64.StdEncoding.EncodeToString(dst), nil
 }
 
+// Regions available
 const (
 	RegionUSA       = "NNA"
 	RegionEurope    = "NE"
@@ -77,6 +78,7 @@ const (
 	RegionJapan     = "NML"
 )
 
+// Config defines the structure of the config file
 type Config struct {
 	Username    string
 	Password    string
@@ -210,6 +212,7 @@ type ScheduledClimate struct {
 // plugged in but not actively charging.
 type PluginState string
 
+// The various possible plugin states
 const (
 	// Not connected to a charger
 	NotConnected = PluginState("NOT_CONNECTED")
@@ -242,6 +245,7 @@ func (ps PluginState) String() string {
 // ChargingStatus indicates whether and how the vehicle is charging.
 type ChargingStatus string
 
+// The various possible charging states
 const (
 	// Not charging
 	NotCharging = ChargingStatus("NOT_CHARGING")
@@ -321,6 +325,7 @@ func (cwt cwTime) FixLocation(location *time.Location) cwTime {
 	return cwTime(t)
 }
 
+// PollCheckFunction is a type definining a poll
 type PollCheckFunction func(string) (bool, error)
 
 type response interface {
@@ -399,9 +404,8 @@ func Connect(cfg Config) (*Session, error) {
 		err = s.Load(cfg.SessionFile)
 		if err == nil && s.customSessionID != "" && s.VIN != "" {
 			return s, nil
-		} else {
-			fmt.Fprintln(os.Stderr, "ERROR: ", err.Error())
 		}
+		fmt.Fprintln(os.Stderr, "ERROR: ", err.Error())
 	}
 
 	return s, s.connect()
@@ -461,6 +465,7 @@ func (s *Session) connect() error {
 	return nil
 }
 
+// Save saves the session information
 func (s Session) Save(fileName string) error {
 	if fileName == "" {
 		return nil
@@ -488,6 +493,7 @@ func (s Session) Save(fileName string) error {
 	return f.Close()
 }
 
+// Load loads the session information
 func (s *Session) Load(fileName string) error {
 	if fileName == "" {
 		return nil
@@ -532,6 +538,7 @@ type sessionVehicleInfo struct {
 	CustomSessionID   string `json:"custom_sessionid"`
 }
 
+// Login handles the session login
 func (s *Session) Login() error {
 	params := url.Values{}
 	params.Set("initial_app_strings", initialAppStrings)
@@ -709,6 +716,36 @@ func (s *Session) CheckUpdate(resultKey string) (bool, error) {
 	params := url.Values{}
 	params.Set("resultKey", resultKey)
 
+	//
+	// Typical (final) response can look like:
+	//  {
+	//    "status": 200,
+	//    "responseFlag": "1",
+	//    "operationResult": "START",
+	//    "timeStamp": "2018-08-11 19:06:46",
+	//    "cruisingRangeAcOn": "98496.0",
+	//    "cruisingRangeAcOff": "102600.0",
+	//    "currentChargeLevel": "0",
+	//    "chargeMode": "220V",
+	//    "pluginState": "CONNECTED",
+	//    "charging": "YES",
+	//    "chargeStatus": "CT",
+	//    "batteryDegradation": "7",
+	//    "batteryCapacity": "12",
+	//    "timeRequiredToFull": {
+	//      "hours": "",
+	//      "minutes": ""
+	//    },
+	//    "timeRequiredToFull200": {
+	//      "hours": "",
+	//      "minutes": ""
+	//    },
+	//    "timeRequiredToFull200_6kW": {
+	//      "hours": "",
+	//      "minutes": ""
+	//    }
+	//  }
+	//
 	var resp struct {
 		baseResponse
 		ResponseFlag    int    `json:"responseFlag,string"`
@@ -732,6 +769,32 @@ func (s *Session) CheckUpdate(resultKey string) (bool, error) {
 // cached from the last time the vehicle data was updated.  Use
 // UpdateStatus method to update vehicle data.
 func (s *Session) BatteryStatus() (BatteryStatus, error) {
+	//
+	// Typical response can look like this:
+	//  {
+	//    "status": 200,
+	//    "BatteryStatusRecords": {
+	//      "OperationResult": "START",
+	//      "OperationDateAndTime": "2018/08/11 20:06",
+	//      "BatteryStatus": {
+	//        "BatteryChargingStatus": "NORMAL_CHARGING",
+	//        "BatteryCapacity": "12",
+	//        "BatteryRemainingAmount": "7",
+	//        "BatteryRemainingAmountWH": "",
+	//        "BatteryRemainingAmountkWH": ""
+	//      },
+	//      "PluginState": "CONNECTED",
+	//      "CruisingRangeAcOn": "98496.0",
+	//      "CruisingRangeAcOff": "102600.0",
+	//      "TimeRequiredToFull200": {
+	//        "HourRequiredToFull": "6",
+	//        "MinutesRequiredToFull": "0"
+	//      },
+	//      "NotificationDateAndTime": "2018/08/11 19:06",
+	//      "TargetDate": "2018/08/11 19:06"
+	//    }
+	//  }
+	//
 	var resp struct {
 		baseResponse
 		BatteryStatusRecords struct {
@@ -1072,7 +1135,7 @@ func (s *Session) CancelScheduledClimateControl(scheduleAt time.Time) error {
 	return nil
 }
 
-// CancelScheduledClimateControl cancels scheduled climate control
+// GetClimateControlSchedule retrieves any previously scheduled climate control
 // I believe this time is specified in GMT, despite the "tz" parameter
 func (s *Session) GetClimateControlSchedule() (ScheduledClimate, error) {
 	/*
