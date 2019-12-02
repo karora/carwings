@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	baseURL = "https://gdcportalgw.its-mo.com/api_v180117_NE/gdc/"
+	baseURL = "https://gdcportalgw.its-mo.com/api_v190426_NE/gdc/"
 
 	// Result of the call to InitialApp.php, which appears to
 	// always be the same.  It'll probably break at some point but
@@ -26,7 +26,7 @@ const (
 	blowfishKey = "uyI5Dj9g8VCOFDnBRUbr3g"
 
 	// Extracted from the NissanConnect EV app
-	initialAppStrings = "geORNtsZe5I4lRGjG9GZiA"
+	initialAppStrings = "9s5rfKVuMrT03RtzajWNcA"
 )
 
 var (
@@ -433,7 +433,7 @@ func (s *Session) connect() error {
 		Baseprm string `json:"baseprm"`
 	}
 
-	err := apiRequest("InitialApp.php", params, &initResp)
+	err := apiRequest("InitialApp_v2.php", params, &initResp)
 	if err != nil {
 		return err
 	}
