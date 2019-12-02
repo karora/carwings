@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/joeshaw/carwings"
+	"github.com/karora/carwings"
 )
 
 func updateLoop(ctx context.Context, s *carwings.Session) {
